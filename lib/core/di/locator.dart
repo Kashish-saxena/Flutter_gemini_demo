@@ -1,0 +1,14 @@
+import 'package:gemini_demo/core/repositories/api_repository.dart';
+import 'package:gemini_demo/core/view_models/chat_view_model.dart';
+import 'package:gemini_demo/core/view_models/home_view_model.dart';
+import 'package:gemini_demo/core/view_models/text_and_image_view_model.dart';
+import 'package:get_it/get_it.dart';
+
+final locator = GetIt.instance;
+
+void setUpLocator() {
+  locator.registerLazySingleton(() => ApiRepository());
+  locator.registerLazySingleton(() => HomeViewModel());
+  locator.registerLazySingleton(() => ChatViewModel());
+  locator.registerLazySingleton(() => TextImageViewModel());
+}
