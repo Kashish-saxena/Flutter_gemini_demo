@@ -11,6 +11,6 @@ class SectionItem {
 }
 
 List<SectionItem> sections = [
-  SectionItem(0, 'Chat', ChatScreen()),
-  SectionItem(1, 'Text And Image', TextAndImageScreen()),
+  SectionItem(0, 'Text And Image', TextAndImageScreen()),
+  SectionItem(1, 'Chat', ChatScreen()),
 ];

@@ -11,7 +11,7 @@ import 'package:gemini_demo/ui/widgets/message_body.dart';
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
 
-  late ChatViewModel model;
+  ChatViewModel? model;
   @override
   Widget build(BuildContext context) {
     return BaseView<ChatViewModel>(
@@ -19,9 +19,15 @@ class ChatScreen extends StatelessWidget {
         this.model = model;
       },
       builder: (context, model, child) {
-        return Scaffold(
-          backgroundColor: ColorConstants.black,
-          body: buildBody(),
+        return GestureDetector(
+               onTap: ()=>FocusScope.of(context).unfocus(),
+          child: SafeArea(
+            
+            child: Scaffold(
+              backgroundColor: ColorConstants.black,
+              body: buildBody(),
+            ),
+          ),
         );
       },
     );
@@ -32,9 +38,17 @@ class ChatScreen extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: model.messages.length,
+            controller: model?.controller,
+            itemCount: model?.messages.length,
             itemBuilder: (context, index) {
-              return _buildMessage(model.messages[index], index);
+              ChatMessage? chatMessage;
+              if (model?.messages[index] != null) {
+                chatMessage = model?.messages[index];
+              }
+
+              return chatMessage != null
+                  ? _buildMessage(chatMessage, index)
+                  : Container();
             },
           ),
         ),
@@ -45,7 +59,15 @@ class ChatScreen extends StatelessWidget {
 
   Widget _buildMessage(ChatMessage message, int index) {
     return MessageBody(
-      text: message.text,
+      widget: Text(
+        message.text,
+        style: TextStyle(
+          color: message.role == Roles.user
+              ? ColorConstants.white
+              : ColorConstants.black,
+          fontSize: 16.0,
+        ),
+      ),
       mainAxisAlignment: message.role == Roles.user
           ? MainAxisAlignment.end
           : MainAxisAlignment.start,
@@ -65,7 +87,16 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              controller: model.messageController,
+              onEditingComplete: () {
+                if (model?.messageController.text.isNotEmpty ?? false) {
+                  model?.sendMessage(model?.messageController.text ?? "");
+                  model?.messageController.clear();
+                }
+              },
+              textInputAction: TextInputAction.send,
+              autofocus: true,
+              controller: model?.messageController,
+              onSubmitted: (value) {},
               decoration: InputDecoration(
                 hintText: StringConstants.typeMessage,
                 border: OutlineInputBorder(
@@ -86,8 +117,11 @@ class ChatScreen extends StatelessWidget {
               color: ColorConstants.white,
             ),
             onPressed: () {
-              model.sendMessage(model.messageController.text);
-              model.messageController.clear();
+              if (model?.messageController.text.toString().isNotEmpty ??
+                  false) {
+                model?.sendMessage(model?.messageController.text ?? "");
+                model?.messageController.clear();
+              }
             },
           ),
         ],

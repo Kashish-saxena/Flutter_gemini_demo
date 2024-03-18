@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/core/constants/color_consant.dart';
-import 'package:gemini_demo/core/constants/string_constant.dart';
 import 'package:gemini_demo/core/models/sections_models.dart';
 import 'package:gemini_demo/core/view_models/home_view_model.dart';
 import 'package:gemini_demo/ui/views/base_view.dart';
@@ -8,7 +7,7 @@ import 'package:gemini_demo/ui/views/base_view.dart';
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  late HomeViewModel model;
+  HomeViewModel? model;
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
@@ -16,17 +15,12 @@ class HomeScreen extends StatelessWidget {
         this.model = model;
       },
       builder: (context, model, child) {
-        return Scaffold(
-          backgroundColor: ColorConstants.black,
-          appBar: AppBar(
+        return SafeArea(
+          child: Scaffold(
             backgroundColor: ColorConstants.black,
-            centerTitle: true,
-            title: const Text(
-              StringConstants.geminiDemo,
-              style: TextStyle(color: ColorConstants.white),
-            ),
+            
+            body: buildBody(),
           ),
-          body: buildBody(),
         );
       },
     );
@@ -36,7 +30,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
+          margin: const EdgeInsets.symmetric(vertical: 30),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
@@ -46,7 +40,7 @@ class HomeScreen extends StatelessWidget {
             child: DropdownButton<int>(
               borderRadius: BorderRadius.circular(30),
               dropdownColor: ColorConstants.white,
-              value: model.selectedItem,
+              value: model?.selectedItem,
               items: List.generate(
                 sections.length,
                 (index) => DropdownMenuItem<int>(
@@ -58,15 +52,16 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               onChanged: (value) {
-                model.onSelection(value);
+                model?.onSelection(value);
               },
             ),
           ),
         ),
         Expanded(
           child: IndexedStack(
-            index: model.selectedItem,
+            index: model?.selectedItem,
             children: sections.map((screen) => screen.widget).toList(),
+            // children: [TextAndImageScreen(),ChatScreen()],
           ),
         ),
       ],

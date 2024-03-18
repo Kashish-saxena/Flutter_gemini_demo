@@ -40,6 +40,8 @@ dependencies:
   get_it: ^7.6.7
   dio: ^5.4.1
   image_picker: ^1.0.7
+  flutter_markdown: ^0.6.21
+  emoji_picker_flutter: ^2.1.0
  
 
 

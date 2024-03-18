@@ -6,4 +6,6 @@ class ColorConstants {
   static const Color blue = Colors.blue;
   static const Color blueAccent = Colors.blueAccent;
   static const Color greyLight = Colors.blueGrey;
+  static const Color transparent = Colors.transparent;
+  
 }

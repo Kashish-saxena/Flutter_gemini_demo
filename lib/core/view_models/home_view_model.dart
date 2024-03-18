@@ -1,10 +1,16 @@
 import 'package:gemini_demo/core/view_models/base_model.dart';
 
 class HomeViewModel extends BaseModel {
-  int selectedItem = 0;
+  int _selectedItem = 0;
+  int get selectedItem => _selectedItem;
 
-  void onSelection(value) {
-    selectedItem = value;
+  set selectedItem(int value) {
+    _selectedItem = value;
+    updateUI();
+  }
+
+  void onSelection(int? value) {
+    _selectedItem = value??0;
     updateUI();
   }
 }
