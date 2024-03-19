@@ -1,1 +1,1 @@
-enum ViewState { idle, busy, error }
+enum ViewState { idle, busy, error, loading}

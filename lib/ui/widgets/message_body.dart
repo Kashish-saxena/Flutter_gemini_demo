@@ -16,16 +16,16 @@ class MessageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
       child: Row(
         mainAxisAlignment: mainAxisAlignment,
         children: [
           Flexible(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.5,horizontal: 15.0,),
               decoration: BoxDecoration(
                 color: boxColor,
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
               child: widget,
             ),

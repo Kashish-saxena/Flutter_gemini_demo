@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      initialRoute: Routes.homeScreen,
+      initialRoute: Routes.chatScreen,
       onGenerateRoute: PageRoutes.generateRoutes,
     );
   }
