@@ -6,6 +6,7 @@ import 'package:gemini_demo/core/view_models/chat_view_model.dart';
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({super.key, required this.model});
   final ChatViewModel? model;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -20,8 +21,9 @@ class TextFormFieldWidget extends StatelessWidget {
           model?.messageController.clear();
         }
       },
-      maxLines: 4,
       minLines: 1,
+      maxLines: null,
+      keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,
       cursorColor: ColorConstants.offWhite,
       style: const TextStyle(color: ColorConstants.white),
@@ -29,13 +31,14 @@ class TextFormFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         counterStyle: const TextStyle(color: ColorConstants.offWhite),
         hintText: StringConstants.typeMessage,
-        hintStyle: const TextStyle(color: ColorConstants.offWhite,fontSize: 13),
+        hintStyle:
+            const TextStyle(color: ColorConstants.offWhite, fontSize: 15),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
           borderSide: BorderSide.none,
         ),
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 12.0,horizontal: 10),
+            const EdgeInsets.symmetric(vertical: 12.0),
       ),
     );
   }

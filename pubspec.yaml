@@ -43,6 +43,7 @@ dependencies:
   flutter_markdown: ^0.6.21
   emoji_picker_flutter: ^2.1.0
   loading_animation_widget: ^1.2.1
+  image_picker_ios: ^0.8.9+2
  
 
 
