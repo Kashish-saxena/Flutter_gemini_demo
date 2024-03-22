@@ -3,22 +3,15 @@ import 'dart:io';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:gemini_demo/core/constants/string_constant.dart';
 
-class ApiRepository {
+class GeminiRepository {
   late Gemini _gemini;
-  static final ApiRepository _instance = ApiRepository._internal();
-  factory ApiRepository() {
+  static final GeminiRepository _instance = GeminiRepository._internal();
+  factory GeminiRepository() {
     return _instance;
   }
-  ApiRepository._internal() {
+  GeminiRepository._internal() {
     _gemini = Gemini.instance;
     _response = reponse;
-  }
-
-  Stream<String> sendStreamText(String text) {
-    return _gemini
-        .streamGenerateContent(text)
-        .map((value) => value.output ?? "")
-        .handleError((e) => log(e));
   }
 
   String? _response;
@@ -49,11 +42,9 @@ class ApiRepository {
       log(value?.content?.parts?.last.text ?? '');
       log("Roles>>>>>>>>>${value?.content?.role}");
       setResponse(_response = value?.content?.parts?.last.text ?? '');
-
       if (value?.finishReason != 'STOP') {
         setResponse(StringConstants.invalidQuery);
       }
-
       return value?.content?.parts?.last.text ?? '';
     }).catchError((e) => "$e");
     return val;

@@ -15,7 +15,7 @@ class PopUpWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.25,
       width: MediaQuery.of(context).size.width,
       child: Card(
-        color: ColorConstants.darkGrey,
+        color: ColorConstants.grey373E4E,
         margin: const EdgeInsets.all(18),
         child: Padding(
           padding: const EdgeInsets.only(top: 15),

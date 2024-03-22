@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/core/constants/color_consant.dart';
 import 'package:gemini_demo/core/constants/image_constants.dart';
@@ -23,7 +22,10 @@ class ChatScreen extends StatelessWidget {
       },
       builder: (context, model, child) {
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () { 
+            FocusScope.of(context).unfocus();
+            model.setShowEmoji=false;
+          },
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -78,7 +80,7 @@ class ChatScreen extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
-            controller: model?.controller,
+            controller: model?.scrollController,
             itemCount: model?.messages.length,
             itemBuilder: (context, index) {
               ChatModel? chatModel;

@@ -9,14 +9,11 @@ class EmojiPickerWidget extends StatelessWidget {
     return 
 
 EmojiPicker(
-  
-    textEditingController: controller, // pass here the same [TextEditingController] that is connected to your input field, usually a [TextFormField]
+    textEditingController: controller,
     config: Config(
         height: 256,
-        // : const Color(0xFFF2F2F2),
         checkPlatformCompatibility: true,
         emojiViewConfig: EmojiViewConfig(
-        // Issue: https://github.com/flutter/flutter/issues/28894
         emojiSizeMax: 28 *
         (foundation.defaultTargetPlatform == TargetPlatform.iOS
             ?  1.20

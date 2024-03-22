@@ -12,27 +12,27 @@ class TextFormFieldWidget extends StatelessWidget {
     return TextField(
       onTap: () {
         if (model?.showEmoji == true) {
-          model?.changeEmoji();
+          model?.setShowEmoji=false;
         }
       },
       onEditingComplete: () {
         if (model?.messageController.text.toString().isNotEmpty ?? false) {
-          model?.sendTextAndImageInfo();
+          model?.getTextAndImageInfo();
           model?.messageController.clear();
         }
       },
       minLines: 1,
       maxLines: null,
       keyboardType: TextInputType.text,
-      keyboardAppearance: Brightness.light,
-      cursorColor: ColorConstants.offWhite,
+      keyboardAppearance: Brightness.dark,
+      cursorColor: ColorConstants.white54,
       style: const TextStyle(color: ColorConstants.white),
       controller: model?.messageController,
       decoration: InputDecoration(
-        counterStyle: const TextStyle(color: ColorConstants.offWhite),
+        counterStyle: const TextStyle(color: ColorConstants.white54),
         hintText: StringConstants.typeMessage,
         hintStyle:
-            const TextStyle(color: ColorConstants.offWhite, fontSize: 15),
+            const TextStyle(color: ColorConstants.white54, fontSize: 15),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
           borderSide: BorderSide.none,

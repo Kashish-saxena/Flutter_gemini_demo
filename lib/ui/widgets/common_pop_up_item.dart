@@ -35,8 +35,7 @@ class PopUpItem extends StatelessWidget {
           ),
             child: CircleAvatar(
               radius: 30,
-            
-              backgroundColor: ColorConstants.offWhite,
+              backgroundColor: ColorConstants.white54,
               child: Icon(icon, color: ColorConstants.white),
             ),
           ),

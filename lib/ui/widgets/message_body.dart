@@ -29,7 +29,7 @@ class MessageBody extends StatelessWidget {
         horizontal: 15.0,
       ),
       decoration: BoxDecoration(
-        color: ColorConstants.lightGrey,
+        color: ColorConstants.grey7A8194,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(topLeft),
           topRight: Radius.circular(topRight),

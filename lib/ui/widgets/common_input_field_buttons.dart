@@ -15,7 +15,7 @@ class InputFieldButton extends StatelessWidget {
       },
       icon: Icon(
         icon,
-        color: ColorConstants.offWhite,
+        color: ColorConstants.white54,
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:gemini_demo/core/constants/color_consant.dart';
 import 'package:gemini_demo/core/constants/image_constants.dart';
 import 'package:gemini_demo/core/view_models/chat_view_model.dart';
 import 'package:gemini_demo/ui/widgets/common_input_field_buttons.dart';
-import 'package:gemini_demo/ui/widgets/pop_up_widget.dart';
+import 'package:gemini_demo/ui/widgets/pop_up_menu.dart';
 import 'package:gemini_demo/ui/widgets/common_text_form_field.dart';
 
 class InputFieldWidget extends StatelessWidget {
@@ -21,7 +21,7 @@ class InputFieldWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(0),
               decoration: BoxDecoration(
-                color: ColorConstants.inputBoxColor,
+                color: ColorConstants.grey3D4354,
                 borderRadius: BorderRadius.circular(25.0),
               ),
               child: Column(
@@ -54,7 +54,7 @@ class InputFieldWidget extends StatelessWidget {
                         icon: Icons.emoji_emotions,
                         onpressed: () {
                           FocusScope.of(context).unfocus();
-                          model?.changeEmoji();
+                          model?.setShowEmoji=true;
                         },
                       ),
                       model?.imageFile == null
@@ -66,6 +66,7 @@ class InputFieldWidget extends StatelessWidget {
                       InputFieldButton(
                         icon: Icons.attach_file,
                         onpressed: () {
+                           model?.setShowEmoji=false;
                           showModalBottomSheet(
                               backgroundColor: ColorConstants.transparent,
                               context: context,
@@ -85,13 +86,13 @@ class InputFieldWidget extends StatelessWidget {
                               model!.messageController.text
                                   .toString()
                                   .isEmpty) {
-                            model?.sendTextAndImageInfo();
+                            model?.getTextAndImageInfo();
                           }
                           if (model?.messageController.text
                                   .toString()
                                   .isNotEmpty ??
                               false) {
-                            model?.sendTextAndImageInfo();
+                            model?.getTextAndImageInfo();
                             model?.messageController.clear();
                           }
                         },

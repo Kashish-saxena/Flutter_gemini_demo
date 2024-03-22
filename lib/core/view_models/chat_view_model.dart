@@ -3,21 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gemini_demo/core/enums/roles.dart';
 import 'package:gemini_demo/core/models/chat_model.dart';
-import 'package:gemini_demo/core/repositories/api_repository.dart';
+import 'package:gemini_demo/core/repositories/gemini_repository.dart';
 import 'package:gemini_demo/core/view_models/base_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatViewModel extends BaseModel {
-  final ApiRepository apiRepository = ApiRepository();
+  final GeminiRepository apiRepository = GeminiRepository();
   final TextEditingController messageController = TextEditingController();
-  final ScrollController controller = ScrollController();
-
+  final ScrollController scrollController = ScrollController();
   late List<ChatModel> _messages;
   File? _imageFile;
-  File? _sendFile;
-  bool _isImageSelected = false;
-  bool _showEmoji = false;
-  int? _loadingMessageIndex;
+  bool? _showEmoji;
   int? _modelResponseIndex;
 
   List<ChatModel> get messages => _messages;
@@ -32,21 +28,9 @@ class ChatViewModel extends BaseModel {
     updateUI();
   }
 
-  bool get isImageSelected => _isImageSelected;
-  set isImageSelected(bool value) {
-    _isImageSelected = value;
-    updateUI();
-  }
-
-  bool get showEmoji => _showEmoji;
-  set showEmoji(bool value) {
-    _showEmoji = !value;
-    updateUI();
-  }
-
-  int? get loadingMessageIndex => _loadingMessageIndex;
-  set loadingMessageIndex(int? value) {
-    _loadingMessageIndex = value;
+  bool? get showEmoji => _showEmoji;
+  set setShowEmoji(bool? value) {
+    _showEmoji = value;
     updateUI();
   }
 
@@ -60,30 +44,29 @@ class ChatViewModel extends BaseModel {
     _messages = [];
   }
 
-  Future<void> sendTextAndImageInfo() async {
-    _sendFile = _imageFile;
-    
-    _messages.add(ChatModel(
+  Future<void> getTextAndImageInfo() async {
+    File? sendFile;
+    sendFile = imageFile;
+    messages.add(ChatModel(
       text: messageController.text,
       role: Roles.user,
-      image: _sendFile,
+      image: sendFile,
     ));
-    _imageFile = null;
+    imageFile = null;
 
-    _messages.add(ChatModel(
+    messages.add(ChatModel(
       role: Roles.model,
       text: "",
     ));
     modelResponseIndex = messages.length;
     scrollMessages();
     updateUI();
-    _isImageSelected = false;
-    String response = _imageFile != null
+    String response = sendFile != null
         ? await apiRepository.sendTextAndImage(
-            messageController.text, _sendFile ?? File(""))
+            messageController.text, sendFile)
         : await apiRepository.sendText(messageController.text);
     messages.removeAt(messages.length - 1);
-    _messages.add(ChatModel(
+    messages.add(ChatModel(
       role: Roles.model,
       text: response,
     ));
@@ -92,8 +75,8 @@ class ChatViewModel extends BaseModel {
   }
 
   scrollMessages() {
-    controller.animateTo(
-      controller.position.maxScrollExtent + 120,
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent + 120,
       duration: const Duration(milliseconds: 50),
       curve: Curves.easeOut,
     );
@@ -103,21 +86,16 @@ class ChatViewModel extends BaseModel {
     try {
       final pickedImage = await ImagePicker().pickImage(source: source);
       if (pickedImage != null) {
-        _imageFile = File(pickedImage.path);
-        _isImageSelected = true;
+        imageFile = File(pickedImage.path);
+      
         updateUI();
-        return _imageFile;
+        return imageFile;
       } else {
         log('User didnt pick any image.');
       }
-      _imageFile = null;
+      imageFile = null;
     } catch (e) {
       log(e.toString());
     }
-  }
-
-  changeEmoji() {
-    _showEmoji = !_showEmoji;
-    updateUI();
   }
 }

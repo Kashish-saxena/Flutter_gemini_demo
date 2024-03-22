@@ -19,9 +19,9 @@ class MessageContent extends StatelessWidget {
         message.role == Roles.model &&
         message.text.isEmpty;
     final isUser = message.role == Roles.user;
-
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+      padding: EdgeInsets.only(
+          bottom: 10.0, right: isUser ? 20.0 : 60.0, left: isUser ? 60 : 20),
       child: Row(
         mainAxisAlignment:
             isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -44,7 +44,7 @@ class MessageContent extends StatelessWidget {
                       Container(
                         clipBehavior: Clip.antiAlias,
                         decoration: const BoxDecoration(
-                          color: ColorConstants.lightGrey,
+                          color: ColorConstants.grey7A8194,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             bottomLeft: Radius.circular(20),
