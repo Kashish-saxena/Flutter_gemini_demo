@@ -21,6 +21,6 @@ This Flutter app showcases the implementation of a Google Geminii clone using th
 ## iOS Screenshots
 
 ## Installation 
-run: $git clone https://github.com/Kashish-saxena/Flutter_gemini_demo.git\n
-run: $flutter pub get\n
+run: $git clone https://github.com/Kashish-saxena/Flutter_gemini_demo.git <br />
+run: $flutter pub get <br />
 run: $flutter run
