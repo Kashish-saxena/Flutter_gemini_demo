@@ -1,16 +1,25 @@
-# gemini_demo
+# Chat Gpt Clone
 
-A new Flutter project.
+This Flutter app showcases the implementation of a Google Geminii clone using the flutter_gemini package from pub.dev. 
 
-## Getting Started
+# Working Demo
 
-This project is a starting point for a Flutter application.
+<table>
+<tr>
+<td><img src="https://github.com/Kashish-saxena/chat_gpt_demo/blob/master/media/chat_gpt.gif" height="480px"></td>
+</tr>
+</table>
 
-A few resources to get you started if this is your first Flutter project:
+## Android Screenshots
+<table>
+<tr>
+<td><img src="https://github.com/Kashish-saxena/chat_gpt_demo/blob/master/media/chat_gpt.gif" height="480px"></td>
+</tr>
+</table>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## iOS Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation 
+run: $git clone https://github.com/Kashish-saxena/Flutter_gemini_demo.git
+run: $flutter pub get
+run: $flutter run
